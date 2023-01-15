@@ -25,8 +25,8 @@ const scene = new THREE.Scene()
 const waterGeometry = new THREE.PlaneGeometry(10, 10, 512, 512)
 
 // Color
-debugObject.depthColor = '#379fd7'
-debugObject.surfaceColor = '#f0f3ff'
+debugObject.depthColor = '#2badf3'
+debugObject.surfaceColor = '#ffffff'
 
 // Material
 const waterMaterial = new THREE.ShaderMaterial({
@@ -36,18 +36,18 @@ const waterMaterial = new THREE.ShaderMaterial({
     {
         uTime: { value : 0 },
 
-        uWavesElevation: { value: 0.098 },
-        uWavesFrequency: { value: new THREE.Vector2(3.14, 1.5)},
+        uWavesElevation: { value: 0.074 },
+        uWavesFrequency: { value: new THREE.Vector2(1.748, 0.975)},
         uWavesSpeed: { value: 0.75 },
 
-        uSmallWavesElevation: { value: 0.144 },
-        uSmallWavesFrequency: { value: 3 },
-        uSmallWavesSpeed: { value: 0.514 },
-        uSmallWavesIterations: { value: 2 },
+        uSmallWavesElevation: { value: 0.19 },
+        uSmallWavesFrequency: { value: 1.069 },
+        uSmallWavesSpeed: { value: 0.235 },
+        uSmallWavesIterations: { value: 4 },
 
         uDepthColor: { value: new THREE.Color(debugObject.depthColor) },
         uSurfaceColor: { value: new THREE.Color(debugObject.surfaceColor) },
-        uColorOffset: { value: 0.152 },
+        uColorOffset: { value: 0.175 },
         uColorMultiplier: { value: 2.676 }
     }
 })
@@ -60,8 +60,6 @@ wavesGUIFolder.add(waterMaterial.uniforms.uWavesFrequency.value, 'y').min(0).max
 wavesGUIFolder.add(waterMaterial.uniforms.uWavesSpeed, 'value').min(0).max(4).step(0.001).name('wavesSpeed')
 
 const smallWavesGUIFolder = gui.addFolder('Small waves')
-smallWavesGUIFolder.add(waterMaterial.uniforms.uColorOffset, 'value').min(0).max(1).step(0.001).name('colorOffset')
-smallWavesGUIFolder.add(waterMaterial.uniforms.uColorMultiplier, 'value').min(0).max(10).step(0.001).name('colorMultiplier')
 smallWavesGUIFolder.add(waterMaterial.uniforms.uSmallWavesElevation, 'value').min(0).max(1).step(0.001).name('smallWavesElevation')
 smallWavesGUIFolder.add(waterMaterial.uniforms.uSmallWavesFrequency, 'value').min(0).max(30).step(0.001).name('smallWavesFrequency')
 smallWavesGUIFolder.add(waterMaterial.uniforms.uSmallWavesSpeed, 'value').min(0).max(4).step(0.001).name('smallWavesSpeed')
@@ -70,6 +68,8 @@ smallWavesGUIFolder.add(waterMaterial.uniforms.uSmallWavesIterations, 'value').m
 const colorsGUIFolder = gui.addFolder('Colors')
 colorsGUIFolder.addColor(debugObject, 'depthColor').name('depthColor').onChange(() => { waterMaterial.uniforms.uDepthColor.value.set(debugObject.depthColor) })
 colorsGUIFolder.addColor(debugObject, 'surfaceColor').name('surfaceColor').onChange(() => { waterMaterial.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor) })
+colorsGUIFolder.add(waterMaterial.uniforms.uColorOffset, 'value').min(0).max(1).step(0.001).name('colorOffset')
+colorsGUIFolder.add(waterMaterial.uniforms.uColorMultiplier, 'value').min(0).max(10).step(0.001).name('colorMultiplier')
 
 
 
