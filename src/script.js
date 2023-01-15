@@ -53,18 +53,25 @@ const waterMaterial = new THREE.ShaderMaterial({
 })
 
 // Debug
-gui.add(waterMaterial.uniforms.uWavesElevation, 'value').min(0).max(1).step(0.001).name('wavesElevation')
-gui.add(waterMaterial.uniforms.uWavesFrequency.value, 'x').min(0).max(10).step(0.001).name('wavesFrequencyX')
-gui.add(waterMaterial.uniforms.uWavesFrequency.value, 'y').min(0).max(10).step(0.001).name('wavesFrequencyY')
-gui.add(waterMaterial.uniforms.uWavesSpeed, 'value').min(0).max(4).step(0.001).name('wavesSpeed')
-gui.addColor(debugObject, 'depthColor').name('depthColor').onChange(() => { waterMaterial.uniforms.uDepthColor.value.set(debugObject.depthColor) })
-gui.addColor(debugObject, 'surfaceColor').name('surfaceColor').onChange(() => { waterMaterial.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor) })
-gui.add(waterMaterial.uniforms.uColorOffset, 'value').min(0).max(1).step(0.001).name('colorOffset')
-gui.add(waterMaterial.uniforms.uColorMultiplier, 'value').min(0).max(10).step(0.001).name('colorMultiplier')
-gui.add(waterMaterial.uniforms.uSmallWavesElevation, 'value').min(0).max(1).step(0.001).name('smallWavesElevation')
-gui.add(waterMaterial.uniforms.uSmallWavesFrequency, 'value').min(0).max(30).step(0.001).name('smallWavesFrequency')
-gui.add(waterMaterial.uniforms.uSmallWavesSpeed, 'value').min(0).max(4).step(0.001).name('smallWavesSpeed')
-gui.add(waterMaterial.uniforms.uSmallWavesIterations, 'value').min(0).max(10).step(1).name('smallWavesIterations')
+const wavesGUIFolder = gui.addFolder('Waves')
+wavesGUIFolder.add(waterMaterial.uniforms.uWavesElevation, 'value').min(0).max(1).step(0.001).name('wavesElevation')
+wavesGUIFolder.add(waterMaterial.uniforms.uWavesFrequency.value, 'x').min(0).max(10).step(0.001).name('wavesFrequencyX')
+wavesGUIFolder.add(waterMaterial.uniforms.uWavesFrequency.value, 'y').min(0).max(10).step(0.001).name('wavesFrequencyY')
+wavesGUIFolder.add(waterMaterial.uniforms.uWavesSpeed, 'value').min(0).max(4).step(0.001).name('wavesSpeed')
+
+const smallWavesGUIFolder = gui.addFolder('Small waves')
+smallWavesGUIFolder.add(waterMaterial.uniforms.uColorOffset, 'value').min(0).max(1).step(0.001).name('colorOffset')
+smallWavesGUIFolder.add(waterMaterial.uniforms.uColorMultiplier, 'value').min(0).max(10).step(0.001).name('colorMultiplier')
+smallWavesGUIFolder.add(waterMaterial.uniforms.uSmallWavesElevation, 'value').min(0).max(1).step(0.001).name('smallWavesElevation')
+smallWavesGUIFolder.add(waterMaterial.uniforms.uSmallWavesFrequency, 'value').min(0).max(30).step(0.001).name('smallWavesFrequency')
+smallWavesGUIFolder.add(waterMaterial.uniforms.uSmallWavesSpeed, 'value').min(0).max(4).step(0.001).name('smallWavesSpeed')
+smallWavesGUIFolder.add(waterMaterial.uniforms.uSmallWavesIterations, 'value').min(0).max(10).step(1).name('smallWavesIterations')
+
+const colorsGUIFolder = gui.addFolder('Colors')
+colorsGUIFolder.addColor(debugObject, 'depthColor').name('depthColor').onChange(() => { waterMaterial.uniforms.uDepthColor.value.set(debugObject.depthColor) })
+colorsGUIFolder.addColor(debugObject, 'surfaceColor').name('surfaceColor').onChange(() => { waterMaterial.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor) })
+
+
 
 // Mesh
 const water = new THREE.Mesh(waterGeometry, waterMaterial)
